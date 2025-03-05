@@ -2,38 +2,69 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const cliente = new Schema({
-    nome: {
-        Type: String,
-        required: [true, "Nome é obrigatório"],
+  nome: {
+    Type: String,
+    required: [true, "Nome é obrigatório"],
+  },
+  telefone: String,
+  email: {
+    Type: String,
+    required: [true, "Email é obrigatório"],
+  },
+  senha: {
+    type: String,
+    default: null,
+  },
+  foto: String,
+  status: {
+    type: String,
+    enum: ["A", "I", "E"],
+    required: true,
+    default: "A",
+  },
+  sexo: {
+    type: String,
+    enum: ["M", "F"],
+    default: null,
+  },
+  dataNascimento: Date,
+  documento: {
+    tipo: {
+      type: String,
+      enum: ["individual", "corporation"],
+      required: true,
     },
-    telefone: String,
-    email: {
-        Type: String,
-        required: [true, "Email é obrigatório"],
+    numero: {
+      type: String,
+      required: true,
     },
-    senha: {
-        type: String,
-        default: null,
+  },
+  endereco: {
+    cidade: {
+      type: String,
+      required: true,
     },
-    foto: String,
-    status: String,
-    sexo: String,
-    dataNascimento: Date,
-    documento: {
-        tipo: String,
-        numero: String,
+    uf: {
+      type: String,
+      required: true,
     },
-    endereco: {
-        cidade: String,
-        uf: String,
-        pais: String,
-        numero: String,
-        cep: String,
+    pais: {
+      type: String,
+      required: true,
     },
-    dataCadastro: {
-        type: Date,
-        default: Date.now,
+    numero: {
+      type: String,
+      required: true,
     },
+    cep: {
+      type: String,
+      required: true,
+    },
+  },
+  dataCadastro: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 module.exports = mongoose.model("Cliente", cliente);
